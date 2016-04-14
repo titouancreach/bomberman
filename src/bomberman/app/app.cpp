@@ -67,6 +67,10 @@ namespace Bomber
         m_window.display();
     }
 
+    ///
+    /// \brief Get drawable entities.
+    /// \return vector of the drawabale entities.
+    ///
     std::vector<sf::Drawable>& App::getEntities()
     {
         return m_entities;
