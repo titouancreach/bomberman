@@ -13,7 +13,7 @@ model {
     all {
       cppCompiler.args '-std=c++17', '-Wall'
 
-      if (toolChain in Gcc && buildTypes.release) {
+      if (toolChain in Gcc && buildType == buildTypes.release) {
          cppCompiler.define "NDEBUG"
       }
 
