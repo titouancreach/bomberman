@@ -10,6 +10,19 @@ namespace bomber {
 App::App()
   : window_({kResX, kResY, kBpp}, "Bomberman") {
 
+  sf::Texture background;
+  if (!background.loadFromFile("asset/background.png")) {
+    exit(0);
+  }
+
+  sf::Sprite* background_sprite = new sf::Sprite();
+
+  background_sprite->setTexture(background);
+  background_sprite->setPosition({0, 0});
+
+  entities_.push_back(background_sprite);
+
+
   sf::Clock clock;
   sf::Time accumulator = sf::Time::Zero;
   sf::Time ups = sf::seconds(1.f / static_cast<float>(kMaxFps));
@@ -57,7 +70,7 @@ void App::Render()
   window_.clear();
 
   for (auto& i: entities_)
-    window_.draw(i);
+    window_.draw(*i);
 
   window_.display();
 }
@@ -66,7 +79,7 @@ void App::Render()
 /// \brief Get drawable entities.
 /// \return vector of the drawabale entities.
 ///
-std::vector<sf::Drawable>& App::get_entities() {
+std::vector<sf::Drawable*>& App::get_entities() {
   return entities_;
 }
 

@@ -14,7 +14,7 @@ class App {
   static const unsigned int kMaxFps = 144;
   static const unsigned int kBpp = 64;
 
-  std::vector<sf::Drawable>& get_entities();
+  std::vector<sf::Drawable*>& get_entities();
 
   App();
   virtual ~App();
@@ -26,7 +26,7 @@ class App {
   void Render();
 
   sf::RenderWindow window_;
-  std::vector<sf::Drawable> entities_;
+  std::vector<sf::Drawable*> entities_;
 
   Map map_;
 
