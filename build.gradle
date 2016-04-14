@@ -1,0 +1,79 @@
+apply plugin: 'cpp'
+
+model {
+
+  /* build type */
+  buildTypes {
+    debug
+    release
+  }
+
+  /* configure build */
+  binaries {
+    all {
+      cppCompiler.args '-std=c++11', '-Wall'
+
+      if (toolChain in Gcc && buildTypes.release) {
+         cppCompiler.define "NDEBUG"
+      }
+
+      if (toolChain in Gcc && buildType == buildTypes.debug) {
+        cppCompiler.args "-g"
+        cppCompiler.define 'DEBUG'
+      }
+    }
+  }
+
+  /* configure external libs */
+
+  repositories {
+
+    libs(PrebuiltLibraries) {
+      sfml {
+        headers.srcDir "/usr/include"
+      }
+
+      def libDir = "/usr/lib/x86_64-linux-gnu/"
+
+      sfmlgraphics {
+        binaries.withType(SharedLibraryBinary) {
+          sharedLibraryFile = file(libDir + 'libsfml-graphics.so')
+        }
+      }
+
+      sfmlwindow {
+        binaries.withType(SharedLibraryBinary) {
+          sharedLibraryFile = file(libDir + 'libsfml-window.so')
+        }
+      }
+
+      sfmlsystem {
+        binaries.withType(SharedLibraryBinary) {
+          sharedLibraryFile = file(libDir + 'libsfml-system.so')
+        }
+      }
+    }
+  }
+
+  /* configure project */
+  components {
+    bomberman(NativeExecutableSpec) {
+      sources {
+        cpp {
+          source {
+            srcDir "src/bomberman/"
+            include "**/*.cpp"
+          }
+          lib library: "sfml", linkage: "api"
+          lib library: "sfmlgraphics"
+          lib library: "sfmlwindow"
+          lib library: "sfmlsystem"
+        }
+      }
+    }
+  }
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.12'
+}
