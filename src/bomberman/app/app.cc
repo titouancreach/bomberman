@@ -41,7 +41,7 @@ void App::ProcessInput() {
 
 ///
 /// \brief Update the application
-/// \description each annimation or move must be
+/// \description each animation or move must be
 /// multiplied by delta to avoid lag.
 /// \param delta Ellapsed time since the last frame
 ///
