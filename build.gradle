@@ -11,7 +11,7 @@ model {
   /* configure build */
   binaries {
     all {
-      cppCompiler.args '-std=c++11', '-Wall'
+      cppCompiler.args '-std=c++17', '-Wall'
 
       if (toolChain in Gcc && buildTypes.release) {
          cppCompiler.define "NDEBUG"
