@@ -64,6 +64,11 @@ model {
             srcDir "src/bomberman/"
             include "**/*.cpp"
           }
+
+          exportedHeaders {
+            srcDirs "src/bomberman/app/"
+          }
+
           lib library: "sfml", linkage: "api"
           lib library: "sfmlgraphics"
           lib library: "sfmlwindow"
