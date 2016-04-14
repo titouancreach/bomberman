@@ -55,6 +55,8 @@ model {
     }
   }
 
+
+
   /* configure project */
   components {
     bomberman(NativeExecutableSpec) {
@@ -83,3 +85,18 @@ model {
 task wrapper(type: Wrapper) {
   gradleVersion = '2.12'
 }
+
+/* copy the assets */
+task copyAssets(type: Copy) << {
+  copy {
+    from "${projectDir}/src/asset/"
+    into "${buildDir}/exe/bomberman/debug/asset"
+  }
+  copy {
+    from "${projectDir}/src/asset/"
+    into "${buildDir}/exe/bomberman/release/asset"
+  }
+}
+
+/* rules dependencies */
+build.dependsOn copyAssets
