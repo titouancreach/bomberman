@@ -77,7 +77,7 @@ namespace Bomber
     }
 
     ///
-    /// \brief Constructor of the application.
+    /// \brief Destructor of the application.
     ///
     App::~App()
     {}
