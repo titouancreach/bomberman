@@ -62,11 +62,12 @@ model {
         cpp {
           source {
             srcDir "src/bomberman/"
-            include "**/*.cpp"
+            include "**/*.cc"
           }
 
           exportedHeaders {
-            srcDirs "src/bomberman/app/"
+            srcDirs "src/bomberman/app", "src/bomberman/map", "src/bomberman/tile/"
+            include "**/*.h"
           }
 
           lib library: "sfml", linkage: "api"

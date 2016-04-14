@@ -18,6 +18,14 @@ indent_style = tab
 [*.md]
 trim_trailing_whitespace = false
 
+[*.cc]
+indent_size = 2
+indent_style = space
+
+[*.h]
+indent_size = 2
+indent_style = space
+
 [build.gradle]
 indent_size = 2
 indent_style = space
