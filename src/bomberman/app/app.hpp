@@ -20,7 +20,7 @@ namespace Bomber {
     private:
 
         void processInput();
-        void update();
+        void update(const sf::Time& delta);
         void render();
 
         sf::RenderWindow m_window;
