@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "../map/map.hpp"
+
 namespace Bomber {
 
     class App
@@ -25,6 +27,8 @@ namespace Bomber {
 
         sf::RenderWindow m_window;
         std::vector<sf::Drawable> m_entities;
+
+        Map map_;
 
     };
 }
