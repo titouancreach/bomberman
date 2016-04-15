@@ -7,9 +7,9 @@ namespace Bomber {
     class App
     {
     public:
-        static const unsigned int RES_X = 1920;
-        static const unsigned int RES_Y = 1080;
-        static const unsigned int MAX_FPS = 130;
+        static const unsigned int RES_X = 1280;
+        static const unsigned int RES_Y = 720;
+        static const unsigned int MAX_FPS = 144;
         static const unsigned int BPP = 64;
 
         std::vector<sf::Drawable>& getEntities();
