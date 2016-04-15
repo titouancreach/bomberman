@@ -15,7 +15,7 @@ App::App()
     exit(0);
   }
 
-  sf::Sprite* background_sprite = new sf::Sprite();
+  std::shared_ptr<sf::Sprite> background_sprite(new sf::Sprite());
 
   background_sprite->setTexture(background);
   background_sprite->setPosition({0, 0});
@@ -79,7 +79,7 @@ void App::Render()
 /// \brief Get drawable entities.
 /// \return vector of the drawabale entities.
 ///
-std::vector<sf::Drawable*>& App::get_entities() {
+std::vector<std::shared_ptr<sf::Drawable>>& App::get_entities() {
   return entities_;
 }
 
