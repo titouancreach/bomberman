@@ -10,14 +10,13 @@ namespace bomber {
 App::App()
   : window_({kResX, kResY, kBpp}, "Bomberman") {
 
-  sf::Texture background;
-  if (!background.loadFromFile("asset/background.png")) {
-    exit(0);
-  }
+  loadTextures();
+
+  window_.setFramerateLimit(60);
 
   std::shared_ptr<sf::Sprite> background_sprite(new sf::Sprite());
 
-  background_sprite->setTexture(background);
+  background_sprite->setTexture(textureManager_.getRef("background"));
   background_sprite->setPosition({0, 0});
 
   entities_.push_back(background_sprite);
@@ -39,6 +38,13 @@ App::App()
     Render();
     accumulator += clock.restart();
   }
+}
+
+/*!
+   \brief loads all required textures
+*/
+void App::loadTextures() {
+  textureManager_.loadTexture("background", "assets/background.png");
 }
 
 ///
