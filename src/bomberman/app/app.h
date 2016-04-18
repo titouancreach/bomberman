@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
+#include "textureManager.h"
 #include "map.h"
 
 namespace bomber {
@@ -30,6 +31,7 @@ class App {
   std::vector<std::shared_ptr<sf::Drawable>> entities_;
 
   Map map_;
+  TextureManager textureManager_;
 
 };
 
