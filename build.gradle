@@ -33,7 +33,7 @@ model {
         headers.srcDir "/usr/include"
       }
 
-      def libDir = "/usr/lib/x86_64-linux-gnu/"
+      def libDir = "/usr/lib/"
 
       sfmlgraphics {
         binaries.withType(SharedLibraryBinary) {
@@ -68,7 +68,7 @@ model {
           }
 
           exportedHeaders {
-            srcDirs "src/bomberman/app", "src/bomberman/map", "src/bomberman/tile/"
+            srcDirs "src/bomberman/app", "src/bomberman/map", "src/bomberman/tile/", "src/bomberman/textureManager", "src/bomberman/gameState"
             include "**/*.h"
           }
 
