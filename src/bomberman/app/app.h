@@ -16,6 +16,8 @@ class App {
   static const unsigned int kMaxFps = 144;
   static const unsigned int kBpp = 64;
 
+  static const unsigned int FrameRateLimit = 60;
+
   std::vector<std::shared_ptr<sf::Drawable>>& get_entities();
 
   App();
@@ -23,6 +25,7 @@ class App {
 
  private:
 
+  void loadTextures();
   void ProcessInput();
   void Update(const sf::Time& delta);
   void Render();
