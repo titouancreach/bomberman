@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 
+namespace bomber {
+
 class TextureManager
 {
 private:
@@ -20,3 +22,5 @@ public:
   TextureManager();
   virtual ~TextureManager();
 };
+
+}

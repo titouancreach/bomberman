@@ -2,6 +2,8 @@
 
 #include "textureManager.h"
 
+namespace bomber {
+
 /*!
    \brief Constructor of the TextureManager
 */
@@ -36,4 +38,6 @@ void TextureManager::loadTexture(const std::string& name, const std::string& pat
 */
 sf::Texture& TextureManager::getRef(const std::string& index) {
   return this->textures.at(index);
+}
+
 }
