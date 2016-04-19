@@ -17,12 +17,11 @@ public:
   /* update frame */
   void update(const float dt);
   /* Change the animation, resetting t in the process */
-  void changeAnim(unsigned int animNum);
+  void changeAnimation(unsigned int animNum);
 
-  /* Current section of the texture that should be displayed */
-  sf::IntRect bounds;
-  /* Pixel dimensions of each individual frame */
-  sf::IntRect frameSize;
+  /* get */
+  sf::IntRect getBounds();
+  sf::IntRect getFrameSize();
 
   Handler();
   Handler(const sf::IntRect& frameSize );
@@ -36,6 +35,10 @@ private:
   /* current animation */
   int current_animation_;
 
+  /* Current section of the texture that should be displayed */
+  sf::IntRect bounds_;
+  /* Pixel dimensions of each individual frame */
+  sf::IntRect frame_size_;
 };
 
 }
