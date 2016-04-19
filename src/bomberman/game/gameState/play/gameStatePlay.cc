@@ -8,7 +8,12 @@ namespace bomber {
   void GameStatePlay::draw(const float dt)
   {
       game_->window_.clear(sf::Color::Black);
+
+      game_->window_.setView(guiView_);
       game_->window_.draw(game_->background);
+
+      game_->window_.setView(gameView_);
+      map_.draw(game_->window_, dt);
 
       return;
   }
@@ -59,6 +64,19 @@ namespace bomber {
       pos *= 0.5f;
       guiView_.setCenter(pos);
       gameView_.setCenter(pos);
+
+      map_ =  Map();
+      map_.setHeight(64);
+      map_.setWidth(64);
+      map_.setTileSize(8);
+      map_.randomize(game_->tiles_);
+//      map_ = Map("test.dat", 64, 64, game_->tiles_);
+
+      /* Centre the camera on the map */
+      sf::Vector2f centre(map_.getWidth(), map_.getHeight() * 0.5);
+      centre *= float( map_.getTileSize() );
+      gameView_.setCenter(centre);
+
   }
 
 }

@@ -21,6 +21,7 @@ namespace bomber {
 
     void loadTextures();
     void loadTiles();
+
   public:
 
     const static int kTileSize = 8;

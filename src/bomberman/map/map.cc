@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <vector>
 #include <map>
 #include <fstream>
@@ -87,9 +89,46 @@ void Map::draw(sf::RenderWindow& window, float dt) {
 
     }
   }
+
 }
 
-Map::~Map() {
+void Map::randomize(std::map<std::string, Tile>& tiles) {
+  Animation staticAnimation(0, 0, 1.0f);
+
+  for (unsigned int y = 0; y < height_; ++y) {
+    for (unsigned int x = 0; x < width_; ++x) {
+
+      /*** random ***/
+     double ix = rand()/static_cast<double>(RAND_MAX+1);
+     // [0,1[ * (max - min) + min is in [min,max[
+     int r = 1 + static_cast<int>( ix * (3 - 1) );
+     /** end random **/
+
+     std::cout << r << std::endl;
+
+     if ( r == 0 ) {
+       tiles_.push_back( tiles.at("wall") );
+     }
+     else if (r==1) {
+       std::cout << "ground!" << std::endl;
+       tiles_.push_back( tiles.at("ground") );
+     }
+
+    }
+  }
 }
+
+/* getters */
+unsigned int Map::getHeight()   const { return height_;    }
+unsigned int Map::getWidth()    const { return width_;     }
+unsigned int Map::getTileSize() const { return tile_size_; }
+
+/* setters */
+void Map::setHeight(unsigned int v)   { height_    = v; }
+void Map::setWidth(unsigned int v)    { width_     = v; }
+void Map::setTileSize(unsigned int v) { tile_size_ = v; };
+
+/* destructor */
+Map::~Map() {}
 
 }

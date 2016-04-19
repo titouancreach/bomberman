@@ -19,6 +19,7 @@ Tile::Tile(const unsigned int tileSize,
   sf::Texture& texture) {
 
   type_ = tileType;
+  tile_variant_ = 0;
 
   sprite_.setOrigin( sf::Vector2f(0.0f, tileSize*(height-1)) );
   sprite_.setTexture(texture);
@@ -48,6 +49,17 @@ void Tile::draw(sf::RenderWindow& window, float dt) {
   sprite_.setTextureRect(animation_handler_.getBounds());
   /* draw the entity */
   window.draw(sprite_);
+
+/*  sf::CircleShape shape(8);
+
+  // change la couleur de la forme pour du vert
+  int max = 255;
+  int min = 0;
+  //  shape.setFillColor(sf::Color((rand() % (int)(max - min + 1)), (rand() % (int)(max - min + 1)), (rand() % (int)(max - min + 1))));
+  shape.setFillColor(sf::Color::Red);
+  shape.setPosition(sprite_.getPosition());
+
+  window.draw(shape);*/
 }
 
 void Tile::update() {

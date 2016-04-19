@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <SFML/Graphics.hpp>
 
 #include "gameStateStart.h"
@@ -66,6 +68,7 @@ namespace bomber {
 
   void GameStateStart::loadgame()
   {
+    std::cout << "loading game.." << std::endl;
     game_->pushState(new GameStatePlay(game_));
   }
 }

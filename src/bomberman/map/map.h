@@ -25,6 +25,18 @@ class Map {
   /* draw to window */
   void draw(sf::RenderWindow& window, float dt);
 
+  void randomize(std::map<std::string, Tile>& tiles);
+
+  /* get */
+  unsigned int getHeight() const;
+  unsigned int getWidth() const;
+  unsigned int getTileSize() const;
+
+  /* set */
+  void setHeight(unsigned int);
+  void setWidth (unsigned int);
+  void setTileSize(unsigned int);
+
  private:
   Tile **data_;
   unsigned int height_;

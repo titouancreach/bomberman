@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "map.h"
 #include "gameState.h"
 
 namespace bomber {
@@ -20,6 +21,8 @@ namespace bomber {
 
     sf::View gameView_;
     sf::View guiView_;
+
+    Map map_;
   };
 
 }
