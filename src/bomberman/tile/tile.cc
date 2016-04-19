@@ -4,6 +4,14 @@
 
 namespace bomber {
 
+/*!
+   \brief Tile constructor
+   \param tileSize size of the tile
+   \param height of the tile
+   \param animations list of animations
+   \param tileType enum, type of the tile
+   \param texture to draw
+*/
 Tile::Tile(const unsigned int tileSize,
   const unsigned int height,
   const std::vector<Animation>& animations,
@@ -25,6 +33,11 @@ Tile::Tile(const unsigned int tileSize,
 Tile::~Tile() {
 }
 
+/*!
+   \brief Draw the tile to the window
+   \param window SFML render window
+   \param dt delta time
+*/
 void Tile::draw(sf::RenderWindow& window, float dt) {
   /* change the sprite to tile variant */
   animation_handler_.changeAnimation(tile_variant_);
@@ -40,6 +53,11 @@ void Tile::update() {
   /* logic of a tile */
 }
 
+/*!
+   \brief Enum to string
+   \param type tile type
+   \return enum string version
+*/
 std::string tileTypeToStr(TileType type)
 {
     switch(type)
