@@ -2,11 +2,16 @@ namespace bomber {
 
 template<typename T>
 bool QuadTree<T>::Insert(const sf::Vector2<uint>& p) {
+
+  // no duplica allowed
   if (datas_.contains(p))
     return false;
 
-  if (points.size() < points.max_size())
-    points[points.size()] = p;
+  if (points.size() < kCapacity) {
+    points.push_back(p);
+    return true;
+  }
+
 
   if (northWest.get() == nullptr) {
     this->Subdivide();
