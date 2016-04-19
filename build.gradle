@@ -71,6 +71,7 @@ model {
             srcDirs "src/bomberman/app",
               "src/bomberman/map",
               "src/bomberman/tile/",
+              "src/bomberman/animation",
               "src/bomberman/textureManager",
               "src/bomberman/game",
               "src/bomberman/game/gameState",
