@@ -24,6 +24,12 @@ file(
     src/bomberman/cpp/map.cc
     src/bomberman/cpp/app.cc
     src/bomberman/cpp/tile.cc
+    src/bomberman/cpp/animation.cc
+    src/bomberman/cpp/animationHandler.cc
+    src/bomberman/cpp/game.cc
+    src/bomberman/cpp/gameStatePlay.cc
+    src/bomberman/cpp/gameStateStart.cc
+    src/bomberman/cpp/textureManager.cc
 )
 
 # external libs
