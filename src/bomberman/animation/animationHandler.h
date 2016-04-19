@@ -5,8 +5,7 @@
 
 #include "animation.h"
 
-namespace bomber::animation
-{
+namespace bomber { namespace animation {
 
 class Handler {
 
@@ -23,6 +22,10 @@ public:
   sf::IntRect getBounds();
   sf::IntRect getFrameSize();
 
+  /* set */
+  void setFrameSize(sf::IntRect);
+
+  /* constructors */
   Handler();
   Handler(const sf::IntRect& frameSize );
 
@@ -31,9 +34,9 @@ private:
   /* array of animation */
   std::vector<Animation> animations_;
   /* current time since animation started */
-  float t_,
+  float t_;
   /* current animation */
-  int current_animation_;
+  unsigned int current_animation_;
 
   /* Current section of the texture that should be displayed */
   sf::IntRect bounds_;
@@ -41,4 +44,4 @@ private:
   sf::IntRect frame_size_;
 };
 
-}
+}}
