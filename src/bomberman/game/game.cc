@@ -9,6 +9,10 @@
 
 namespace bomber {
 
+  void Game::loadTextures() {
+    texmgr_.loadTexture("background", "assets/background.png");
+  }
+
   void Game::pushState(GameState* state) {
     states_.push(state);
   }
@@ -52,6 +56,9 @@ namespace bomber {
   Game::Game()
     : window_({kResX, kResY, kBpp}, "Bomberman") {
       window_.setFramerateLimit(60);
+
+      loadTextures();
+      background.setTexture(texmgr_.getRef("background"));
   }
 
   Game::~Game() {

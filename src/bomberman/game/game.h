@@ -3,6 +3,7 @@
 #include <stack>
 #include <SFML/Graphics.hpp>
 
+#include "textureManager.h"
 
 namespace bomber {
 
@@ -17,6 +18,7 @@ namespace bomber {
 
     static const unsigned int FrameRateLimit = 60;
 
+    void loadTextures();
   public:
 
     std::stack<GameState*> states_;
@@ -29,6 +31,9 @@ namespace bomber {
     GameState* peekState();
 
     void gameLoop();
+
+    TextureManager texmgr_;
+    sf::Sprite background;
 
     Game();
     virtual ~Game();

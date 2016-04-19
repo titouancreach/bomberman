@@ -68,7 +68,15 @@ model {
           }
 
           exportedHeaders {
-            srcDirs "src/bomberman/app", "src/bomberman/map", "src/bomberman/tile/", "src/bomberman/textureManager", "src/bomberman/game"
+            srcDirs "src/bomberman/app",
+              "src/bomberman/map",
+              "src/bomberman/tile/",
+              "src/bomberman/textureManager",
+              "src/bomberman/game",
+              "src/bomberman/game/gameState",
+              "src/bomberman/game/gameState/start",
+              "src/bomberman/game/gameState/play"
+
             include "**/*.h"
           }
 
