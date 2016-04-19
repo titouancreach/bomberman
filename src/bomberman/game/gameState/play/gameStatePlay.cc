@@ -42,6 +42,7 @@ namespace bomber {
               {
                   gameView_.setSize(event.size.width, event.size.height);
                   guiView_.setSize(event.size.width, event.size.height);
+                  gameView_.zoom(zoom_level_);
                   game_->background.setPosition(game_->window_.mapPixelToCoords(sf::Vector2i(0, 0), guiView_));
                   game_->background.setScale(
                       float(event.size.width) / float(game_->background.getTexture()->getSize().x),
