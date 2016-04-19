@@ -57,13 +57,16 @@ namespace bomber {
 
   GameStatePlay::GameStatePlay(Game* game)
   {
+      zoom_level_ = 0.5f;
       game_ = game;
       sf::Vector2f pos = sf::Vector2f(game_->window_.getSize());
       guiView_.setSize(pos);
       gameView_.setSize(pos);
       pos *= 0.5f;
       guiView_.setCenter(pos);
+      gameView_.zoom(zoom_level_);
       gameView_.setCenter(pos);
+
 
       map_ =  Map();
       map_.setHeight(64);

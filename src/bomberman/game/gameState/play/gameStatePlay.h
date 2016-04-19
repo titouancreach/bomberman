@@ -19,6 +19,8 @@ namespace bomber {
 
   private:
 
+    float zoom_level_;
+
     sf::View gameView_;
     sf::View guiView_;
 
