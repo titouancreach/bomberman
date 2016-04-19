@@ -10,13 +10,14 @@ class Map {
 
  public:
   Map();
-  Map(const std::string& filename, unsigned int width, unsigned int height);
-  
+  Map(const std::string& filename, unsigned int width, unsigned int height,
+    std::map<std::string, Tile>& tiles);
+
   virtual ~Map();
 
   /* load from disk */
   void load(const std::string& filename, unsigned int width,
-    unsigned int height, std::map<std::string, Tile& tiles);
+    unsigned int height, std::map<std::string, Tile>& tiles);
 
   /* save to disk */
   void save(const std::string& filename);
@@ -32,8 +33,7 @@ class Map {
   /* tiles related */
   std::vector<Tile> tiles_;
   unsigned int tile_size_;
-  unsigned int num_selected_; // TODO REMOVE
-  unsigned int num_regions_;
+  unsigned int num_regions_[1];
 
 };
 

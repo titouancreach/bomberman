@@ -26,16 +26,20 @@ public:
   void draw(sf::RenderWindow&, float);
   void update();
 
+  /* different variant for the same tile - graphically */
+  int tile_variant_;
+
+  /* get */
+  const TileType& getType();
+  sf::Sprite sprite_;
+
  private:
   animation::Handler animation_handler_;
 
 
-  int flags_;
-  sf::Sprite sprite_;
   TileType type_;
+  int flags_;
 
-  /* different variant for the same tile - graphically */
-  int tile_variant_;
 
 };
 

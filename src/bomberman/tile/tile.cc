@@ -54,6 +54,13 @@ void Tile::update() {
   /* logic of a tile */
 }
 
+/* get */
+const TileType& Tile::getType() {
+  return type_;
+}
+
+/* set */
+
 /*!
    \brief Enum to string
    \param type tile type
