@@ -121,7 +121,7 @@ unsigned int Map::getTileSize() const { return tile_size_; }
 /* setters */
 void Map::setHeight(unsigned int v)   { height_    = v; }
 void Map::setWidth(unsigned int v)    { width_     = v; }
-void Map::setTileSize(unsigned int v) { tile_size_ = v; };
+void Map::setTileSize(unsigned int v) { tile_size_ = v; }
 
 /* destructor */
 Map::~Map() {}
