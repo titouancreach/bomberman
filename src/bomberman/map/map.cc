@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <vector>
 #include <map>
 #include <fstream>
@@ -104,13 +102,10 @@ void Map::randomize(std::map<std::string, Tile>& tiles) {
      int r = 1 + static_cast<int>( ix * (3 - 1) );
      /** end random **/
 
-     std::cout << r << std::endl;
-
      if ( r == 0 ) {
        tiles_.push_back( tiles.at("wall") );
      }
      else if (r==1) {
-       std::cout << "ground!" << std::endl;
        tiles_.push_back( tiles.at("ground") );
      }
 
