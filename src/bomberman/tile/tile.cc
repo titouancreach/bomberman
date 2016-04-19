@@ -30,6 +30,7 @@ Tile::Tile(const unsigned int tileSize,
   animation_handler_.update(0.0f);
 }
 
+Tile::Tile() {}
 Tile::~Tile() {
 }
 

@@ -3,6 +3,7 @@
 #include <stack>
 #include <SFML/Graphics.hpp>
 
+#include "tile.h"
 #include "textureManager.h"
 
 namespace bomber {
@@ -19,8 +20,10 @@ namespace bomber {
     static const unsigned int FrameRateLimit = 60;
 
     void loadTextures();
+    void loadTiles();
   public:
 
+    const static int kTileSize = 8;
     std::stack<GameState*> states_;
 
     sf::RenderWindow window_;
@@ -34,6 +37,8 @@ namespace bomber {
 
     TextureManager texmgr_;
     sf::Sprite background;
+
+    std::map<std::string, Tile> tiles_;
 
     Game();
     virtual ~Game();

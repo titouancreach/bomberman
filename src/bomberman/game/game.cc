@@ -11,6 +11,17 @@ namespace bomber {
 
   void Game::loadTextures() {
     texmgr_.loadTexture("background", "assets/background.png");
+    texmgr_.loadTexture("ground", "assets/ground.png");
+    texmgr_.loadTexture("wall", "assets/wall.png");
+  }
+
+  void Game::loadTiles() {
+    Animation staticAnimation(0, 0, 1.0f);
+
+    tiles_["ground"] = Tile( kTileSize, 1, {staticAnimation},
+      TileType::GROUND, texmgr_.getRef("ground") );
+    tiles_["wall"] = Tile( kTileSize, 1, {staticAnimation},
+      TileType::WALL, texmgr_.getRef("wall"));
   }
 
   void Game::pushState(GameState* state) {
@@ -58,6 +69,7 @@ namespace bomber {
       window_.setFramerateLimit(60);
 
       loadTextures();
+      loadTiles();
       background.setTexture(texmgr_.getRef("background"));
   }
 

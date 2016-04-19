@@ -15,6 +15,7 @@ std::string tileTypeToStr(TileType type);
 class Tile {
 
 public:
+  Tile();
   Tile(const unsigned int,
     const unsigned int,
     const std::vector<Animation>& animations,
