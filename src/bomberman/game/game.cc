@@ -20,7 +20,7 @@ namespace bomber {
 
     tiles_["ground"] = Tile( kTileSize, 1, {staticAnimation},
       TileType::GROUND, texmgr_.getRef("ground") );
-    tiles_["wall"] = Tile( kTileSize, 1, {staticAnimation},
+    tiles_["wall"] = Tile( kTileSize, 2, {staticAnimation},
       TileType::WALL, texmgr_.getRef("wall"));
   }
 
