@@ -20,7 +20,8 @@ namespace bomber {
 
     sf::View view_;
 
-    void loadgame();
+    void loadGame();
+    void editGame();
 
   };
 

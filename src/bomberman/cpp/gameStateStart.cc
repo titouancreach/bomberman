@@ -1,7 +1,14 @@
+#ifdef DEBUG
+# define D(x) x
+#else
+# define D(x)
+#endif
+
 #include <iostream>
 
 #include <SFML/Graphics.hpp>
 
+#include "gameStateEditor.h"
 #include "gameStateStart.h"
 #include "gameStatePlay.h"
 #include "gameState.h"
@@ -49,7 +56,8 @@ namespace bomber {
         case sf::Event::KeyPressed:
         {
           if (event.key.code == sf::Keyboard::Escape) game_->window_.close();
-          else if(event.key.code == sf::Keyboard::Space) loadgame();
+          else if(event.key.code == sf::Keyboard::Space) loadGame();
+          else if(event.key.code == sf::Keyboard::A) editGame();
           break;
         }
         /* default behaviour */
@@ -66,9 +74,13 @@ namespace bomber {
       view_.setCenter(pos);
   }
 
-  void GameStateStart::loadgame()
-  {
-    std::cout << "loading game.." << std::endl;
-    game_->pushState(new GameStatePlay(game_));
+  void GameStateStart::editGame() {
+    D( std::cout << "@editGame" << std::endl; )
+    game_->pushState( new GameStateEditor(game_) );
+  }
+
+  void GameStateStart::loadGame() {
+    D( std::cout << "@loadGame" << std::endl; )
+    game_->pushState( new GameStatePlay(game_) );
   }
 }

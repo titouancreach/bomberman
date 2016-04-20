@@ -7,24 +7,24 @@
 
 namespace bomber {
 
-  class GameStatePlay : public GameState {
+class GameStatePlay : public GameState {
 
-  public:
+public:
 
-    virtual void draw(const float dt);
-    virtual void update(const float dt);
-    virtual void handleInput();
+  virtual void draw(const float dt);
+  virtual void update(const float dt);
+  virtual void handleInput();
 
-    GameStatePlay(Game *);
+  GameStatePlay(Game *);
 
-  private:
+private:
 
-    float zoom_level_;
+  float zoom_level_;
 
-    sf::View gameView_;
-    sf::View guiView_;
+  sf::View gameView_;
+  sf::View guiView_;
 
-    Map map_;
-  };
+  Map map_;
+};
 
 }
