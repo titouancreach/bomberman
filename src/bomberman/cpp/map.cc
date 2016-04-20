@@ -97,11 +97,25 @@ void Map::draw(sf::RenderWindow& window, float dt) {
 void Map::empty(std::map<std::string, Tile>& tiles) {
   Animation staticAnimation(0, 0, 1.0f);
 
-  for (unsigned int y = 0; y < height_; ++y) {
-    for (unsigned int x = 0; x < width_; ++x) {
+  /* side */
+  for (unsigned int x = 0; x < width_ ; ++x)
+    tiles_.push_back( tiles.at("wall") );
+
+  /* inside */
+  for (unsigned int y = 1; y < height_ - 1; ++y) {
+
+    tiles_.push_back( tiles.at("wall") );
+
+    for (unsigned int x = 1; x < width_ - 1; ++x) {
        tiles_.push_back( tiles.at("ground") );
     }
+
+    tiles_.push_back( tiles.at("wall") );
   }
+
+  /* side */
+  for (unsigned int x = 0; x < width_ ; ++x)
+    tiles_.push_back( tiles.at("wall") );
 }
 
 /*!
