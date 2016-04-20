@@ -8,7 +8,7 @@ project(Bomberman)
 
 # compiler options
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -std=c++17")
-
+add_definitions(-DDEBUG)
 
 ##
 # Create librairies
@@ -29,6 +29,7 @@ file(
     src/bomberman/cpp/game.cc
     src/bomberman/cpp/gameStatePlay.cc
     src/bomberman/cpp/gameStateStart.cc
+    src/bomberman/cpp/gameStateEditor.cc
     src/bomberman/cpp/textureManager.cc
 )
 
