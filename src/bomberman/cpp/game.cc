@@ -27,7 +27,7 @@ namespace bomber {
       TileType::WALL, texmgr_.getRef("wall"));
     /* unbreakable wall */
     tiles_["unbreakable_wall"] = Tile( kTileSize, 2, {staticAnimation},
-      TileType::WALL, texmgr_.getRef("unbreakable_wall"));
+      TileType::UNBREAKABLE_WALL, texmgr_.getRef("unbreakable_wall"));
   }
 
   void Game::pushState(GameState* state) {

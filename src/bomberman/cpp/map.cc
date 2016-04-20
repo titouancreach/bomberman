@@ -153,26 +153,26 @@ void Map::empty(std::map<std::string, Tile>& tiles) {
   /* side */
   for (unsigned int x = 0; x < width_ ; ++x) {
     selected_.push_back(0);
-    tiles_.push_back( tiles.at("wall") );
+    tiles_.push_back( tiles.at("unbreakable_wall") );
   }
 
   /* inside */
   for (unsigned int y = 1; y < height_ - 1; ++y) {
     selected_.push_back(0);
-    tiles_.push_back( tiles.at("wall") );
+    tiles_.push_back( tiles.at("unbreakable_wall") );
 
     for (unsigned int x = 1; x < width_ - 1; ++x) {
       selected_.push_back(0);
       tiles_.push_back( tiles.at("ground") );
     }
     selected_.push_back(0);
-    tiles_.push_back( tiles.at("wall") );
+    tiles_.push_back( tiles.at("unbreakable_wall") );
   }
 
   /* side */
   for (unsigned int x = 0; x < width_ ; ++x) {
     selected_.push_back(0);
-    tiles_.push_back( tiles.at("wall") );
+    tiles_.push_back( tiles.at("unbreakable_wall") );
   }
 }
 
@@ -189,7 +189,7 @@ void Map::randomize(std::map<std::string, Tile>& tiles) {
       /*** random ***/
      double ix = rand()/static_cast<double>(RAND_MAX+1);
      // [0,1[ * (max - min) + min is in [min,max[
-     int r = 1 + static_cast<int>( ix * (3 - 1) );
+     int r = 2 + static_cast<int>( ix * (3 - 0) );
      /** end random **/
 
      if ( r == 0 ) {
@@ -198,7 +198,10 @@ void Map::randomize(std::map<std::string, Tile>& tiles) {
      else if (r==1) {
        tiles_.push_back( tiles.at("ground") );
      }
-
+     else if (r==2) {
+       tiles_.push_back( tiles.at("unbreakable_wall") );
+     }
+     selected_.push_back(0);
     }
   }
 }

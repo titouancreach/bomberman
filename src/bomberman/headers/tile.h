@@ -8,7 +8,7 @@
 
 namespace bomber {
 
-enum class TileType { VOID, GROUND, WALL };
+enum class TileType { VOID, GROUND, WALL, UNBREAKABLE_WALL };
 
 std::string tileTypeToStr(TileType type);
 
