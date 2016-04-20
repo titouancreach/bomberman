@@ -87,7 +87,7 @@ void Map::draw(sf::RenderWindow& window, float dt) {
       tiles_[y * width_ + x].sprite_.setPosition(pos);
 
       /* Change the color if the tile is selected */
-      if(selected_[y*width_+x])
+      if (selected_[y*width_+x] == 1)
           tiles_[y*width_+x].sprite_.setColor(sf::Color(0x7d, 0x7d, 0x7d));
       else
           tiles_[y*width_+x].sprite_.setColor(sf::Color(0xff, 0xff, 0xff));
@@ -127,7 +127,7 @@ void Map::select(sf::Vector2u start, sf::Vector2u end, std::vector<TileType> bla
            * invalid, otherwise select it */
           selected_[y*width_+x] = 1;
           ++num_selected_;
-          for(auto type : blacklist)
+          for (auto type : blacklist)
           {
               if( tiles_[y*width_+x].getType() == type )
               {

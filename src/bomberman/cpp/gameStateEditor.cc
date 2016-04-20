@@ -74,7 +74,7 @@ void GameStateEditor::handleInput()
                     {
                         map_.select(selection_start_, selection_end_,
                         {
-                            current_tile_->getType(),    TileType::WALL
+                            current_tile_->getType(), TileType::WALL
                         });
                     }
                 }
