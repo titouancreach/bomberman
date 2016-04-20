@@ -13,15 +13,21 @@ namespace bomber {
     texmgr_.loadTexture("background", "assets/background.png");
     texmgr_.loadTexture("ground", "assets/ground.png");
     texmgr_.loadTexture("wall", "assets/wall.png");
+    texmgr_.loadTexture("unbreakable_wall", "assets/unbreakable_wall.png");
   }
 
   void Game::loadTiles() {
     Animation staticAnimation(0, 0, 1.0f);
 
+    /* ground */
     tiles_["ground"] = Tile( kTileSize, 1, {staticAnimation},
       TileType::GROUND, texmgr_.getRef("ground") );
+    /* normal wall */
     tiles_["wall"] = Tile( kTileSize, 2, {staticAnimation},
       TileType::WALL, texmgr_.getRef("wall"));
+    /* unbreakable wall */
+    tiles_["unbreakable_wall"] = Tile( kTileSize, 2, {staticAnimation},
+      TileType::WALL, texmgr_.getRef("unbreakable_wall"));
   }
 
   void Game::pushState(GameState* state) {
