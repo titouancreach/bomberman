@@ -90,6 +90,24 @@ void Map::draw(sf::RenderWindow& window, float dt) {
 
 }
 
+/*!
+   \brief Creates an empty map
+   \param tiles tiles atlas
+*/
+void Map::empty(std::map<std::string, Tile>& tiles) {
+  Animation staticAnimation(0, 0, 1.0f);
+
+  for (unsigned int y = 0; y < height_; ++y) {
+    for (unsigned int x = 0; x < width_; ++x) {
+       tiles_.push_back( tiles.at("ground") );
+    }
+  }
+}
+
+/*!
+   \brief Creates random map
+   \param tiles tiles atlas
+*/
 void Map::randomize(std::map<std::string, Tile>& tiles) {
   Animation staticAnimation(0, 0, 1.0f);
 

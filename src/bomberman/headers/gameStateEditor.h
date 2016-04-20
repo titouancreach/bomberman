@@ -7,6 +7,8 @@
 
 namespace bomber {
 
+enum class ActionState { NONE, PANNING };
+
 class GameStateEditor : public GameState {
 
 public:
@@ -19,12 +21,17 @@ public:
 
 private:
 
+  ActionState action_state_;
+
   float zoom_level_;
 
-  sf::View gameView_;
-  sf::View guiView_;
+  sf::View game_view_;
+  sf::View gui_view_;
+
+  sf::Vector2i panning_anchor_;
 
   Map map_;
+
 };
 
 }
