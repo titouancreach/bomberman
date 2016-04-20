@@ -7,7 +7,7 @@
 
 namespace bomber {
 
-enum class ActionState { NONE, PANNING };
+enum class ActionState { NONE, PANNING, SELECTING };
 
 class GameStateEditor : public GameState {
 
@@ -32,6 +32,10 @@ private:
 
   Map map_;
 
+  sf::Vector2u selection_start_;
+  sf::Vector2u selection_end_;
+
+  Tile* current_tile_;
 };
 
 }

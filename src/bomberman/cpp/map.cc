@@ -10,6 +10,7 @@
 namespace bomber {
 
 Map::Map() {
+  num_selected_ = 0;
   tile_size_ = 8;
   width_ = 0;
   height_ = 0;
@@ -18,7 +19,9 @@ Map::Map() {
 
 Map::Map(const std::string& filename, unsigned int width, unsigned int height,
   std::map<std::string, Tile> &tiles) {
-  this->tile_size_ = 8;
+
+  num_selected_ = 0;
+  tile_size_ = 8;
   load(filename, width, height, tiles);
 }
 
@@ -32,6 +35,8 @@ void Map::load(const std::string& filename, unsigned int width,
   height_ = height;
 
   for (unsigned int pos = 0; pos < width_ * height_; ++pos) {
+
+    selected_.push_back(0);
 
     TileType tileType;
 
@@ -51,8 +56,6 @@ void Map::load(const std::string& filename, unsigned int width,
 
     Tile& tile = tiles_.back();
     iFile.read((char*)&tile.tile_variant_, sizeof(int));
-//    iFile.read((char*)&tile.regions, sizeof(int)*1);
-
   }
 
   iFile.close();
@@ -82,12 +85,61 @@ void Map::draw(sf::RenderWindow& window, float dt) {
 
       /* set pos */
       tiles_[y * width_ + x].sprite_.setPosition(pos);
+
+      /* Change the color if the tile is selected */
+      if(selected_[y*width_+x])
+          tiles_[y*width_+x].sprite_.setColor(sf::Color(0x7d, 0x7d, 0x7d));
+      else
+          tiles_[y*width_+x].sprite_.setColor(sf::Color(0xff, 0xff, 0xff));
+
       /* draw the tile */
       tiles_[y * width_ + x].draw(window, dt);
 
     }
   }
 
+}
+
+void Map::clearSelected() {
+    for(auto& tile : selected_) tile = 0;
+    num_selected_ = 0;
+    return;
+}
+
+void Map::select(sf::Vector2u start, sf::Vector2u end, std::vector<TileType> blacklist){
+  /* Swap coordinates if necessary */
+  if(end.y < start.y) std::swap(start.y, end.y);
+  if(end.x < start.x) std::swap(start.x, end.x);
+
+  /* Clamp in range */
+  if(end.x >= width_)       end.x = width_ - 1;
+  else if(end.x < 0)        end.x = 0;
+  if(end.y >= height_)      end.y = height_ - 1;
+  else if(end.y < 0)        end.y = 0;
+  if(start.x >= width_)     start.x = width_ - 1;
+  else if(start.x < 0)      start.x = 0;
+  if (start.y >= height_)   start.y = height_ - 1;
+  else if(start.y < 0)      start.y = 0;
+
+  for(unsigned int y = start.y; y <= end.y; ++y) {
+      for(unsigned int x = start.x; x <= end.x; ++x) {
+          /* Check if the tile type is in the blacklist. If it is, mark it as
+           * invalid, otherwise select it */
+          selected_[y*width_+x] = 1;
+          ++num_selected_;
+          for(auto type : blacklist)
+          {
+              if( tiles_[y*width_+x].getType() == type )
+              {
+                  selected_[y*width_+x] = 2;
+                  --num_selected_;
+                  break;
+              }
+          }
+      }
+  }
+
+  return;
 }
 
 /*!
@@ -97,25 +149,31 @@ void Map::draw(sf::RenderWindow& window, float dt) {
 void Map::empty(std::map<std::string, Tile>& tiles) {
   Animation staticAnimation(0, 0, 1.0f);
 
+
   /* side */
-  for (unsigned int x = 0; x < width_ ; ++x)
+  for (unsigned int x = 0; x < width_ ; ++x) {
+    selected_.push_back(0);
     tiles_.push_back( tiles.at("wall") );
+  }
 
   /* inside */
   for (unsigned int y = 1; y < height_ - 1; ++y) {
-
+    selected_.push_back(0);
     tiles_.push_back( tiles.at("wall") );
 
     for (unsigned int x = 1; x < width_ - 1; ++x) {
-       tiles_.push_back( tiles.at("ground") );
+      selected_.push_back(0);
+      tiles_.push_back( tiles.at("ground") );
     }
-
+    selected_.push_back(0);
     tiles_.push_back( tiles.at("wall") );
   }
 
   /* side */
-  for (unsigned int x = 0; x < width_ ; ++x)
+  for (unsigned int x = 0; x < width_ ; ++x) {
+    selected_.push_back(0);
     tiles_.push_back( tiles.at("wall") );
+  }
 }
 
 /*!

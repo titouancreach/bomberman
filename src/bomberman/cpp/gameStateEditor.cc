@@ -1,3 +1,4 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 #include "gameState.h"
@@ -52,27 +53,75 @@ void GameStateEditor::handleInput()
 
             case sf::Event::MouseMoved: {
                 /* Pan the camera */
-                if( this->action_state_ == ActionState::PANNING ) {
-                    sf::Vector2f pos = sf::Vector2f(sf::Mouse::getPosition(game_->window_) - this->panning_anchor_);
+                if( action_state_ == ActionState::PANNING ) {
+                    sf::Vector2f pos = sf::Vector2f(sf::Mouse::getPosition(game_->window_) - panning_anchor_);
                     game_view_.move(-1.0f * pos * zoom_level_);
                     panning_anchor_ = sf::Mouse::getPosition(game_->window_);
+                }
+                /* Select tiles */
+                else if(action_state_ == ActionState::SELECTING)
+                {
+                    sf::Vector2f pos = game_->window_.mapPixelToCoords(sf::Mouse::getPosition(game_->window_), game_view_);
+                    selection_end_.x = pos.y / (map_.getTileSize()) + pos.x / (2*map_.getTileSize()) - map_.getWidth() * 0.5 - 0.5;
+                    selection_end_.y = pos.y / (map_.getTileSize()) - pos.x / (2*map_.getTileSize()) + map_.getWidth() * 0.5 + 0.5;
+
+                    map_.clearSelected();
+                    if(current_tile_->getType() == TileType::GROUND)
+                    {
+                        map_.select(selection_start_, selection_end_, {current_tile_->getType(), TileType::WALL});
+                    }
+                    else
+                    {
+                        map_.select(selection_start_, selection_end_,
+                        {
+                            current_tile_->getType(),    TileType::WALL
+                        });
+                    }
                 }
                 break;
             }
             case sf::Event::MouseButtonPressed: {
                 /* Start panning */
                 if(event.mouseButton.button == sf::Mouse::Middle) {
-                    if(this->action_state_ != ActionState::PANNING) {
-                        this->action_state_ = ActionState::PANNING;
-                        this->panning_anchor_ = sf::Mouse::getPosition(game_->window_);
+                    if(action_state_ != ActionState::PANNING) {
+                        action_state_ = ActionState::PANNING;
+                        panning_anchor_ = sf::Mouse::getPosition(game_->window_);
                     }
                 }
+                else if(event.mouseButton.button == sf::Mouse::Left)
+                {
+                    /* Select map tile */
+                    if(action_state_ != ActionState::SELECTING)
+                    {
+                        action_state_ = ActionState::SELECTING;
+                        sf::Vector2f pos = game_->window_.mapPixelToCoords(sf::Mouse::getPosition(game_->window_), game_view_);
+                        selection_start_.x = pos.y / (map_.getTileSize()) + pos.x / (2*map_.getTileSize()) - map_.getWidth() * 0.5 - 0.5;
+                        selection_start_.y = pos.y / (map_.getTileSize()) - pos.x / (2*map_.getTileSize()) + map_.getWidth() * 0.5 + 0.5;
+                    }
+                }
+                else if(event.mouseButton.button == sf::Mouse::Right)
+                {
+                    /* Stop selecting */
+                    if(action_state_ == ActionState::SELECTING)
+                    {
+                        action_state_ = ActionState::NONE;
+                        map_.clearSelected();
+                    }
+                }
+
                 break;
             }
             case sf::Event::MouseButtonReleased: {
                 /* Stop panning */
                 if(event.mouseButton.button == sf::Mouse::Middle)
-                    this->action_state_ = ActionState::NONE;
+                    action_state_ = ActionState::NONE;
+                /* Stop selecting */
+                else if(event.mouseButton.button == sf::Mouse::Left) {
+                    if(action_state_ == ActionState::SELECTING) {
+                        action_state_ = ActionState::NONE;
+                        map_.clearSelected();
+                    }
+                }
                 break;
             }
             /* Zoom the view */
@@ -96,31 +145,36 @@ void GameStateEditor::handleInput()
     return;
 }
 
-GameStateEditor::GameStateEditor(Game* game)
-{
-    zoom_level_ = 0.5f;
-    game_ = game;
-    sf::Vector2f pos = sf::Vector2f(game_->window_.getSize());
-    gui_view_.setSize(pos);
-    game_view_.setSize(pos);
-    pos *= 0.5f;
-    gui_view_.setCenter(pos);
-    game_view_.zoom(zoom_level_);
-    game_view_.setCenter(pos);
+GameStateEditor::GameStateEditor(Game* game) {
+
+  zoom_level_ = 0.5f;
+  game_ = game;
+  sf::Vector2f pos = sf::Vector2f(game_->window_.getSize());
+  gui_view_.setSize(pos);
+  game_view_.setSize(pos);
+  pos *= 0.5f;
+  gui_view_.setCenter(pos);
+  game_view_.zoom(zoom_level_);
+  game_view_.setCenter(pos);
 
 
-    map_ =  Map();
-    map_.setHeight(64);
-    map_.setWidth(64);
-    map_.setTileSize(8);
-    map_.empty(game_->tiles_);
+  map_ =  Map();
+  map_.setHeight(64);
+  map_.setWidth(64);
+  map_.setTileSize(8);
+  map_.empty(game_->tiles_);
 
-    /* Centre the camera on the map */
-    sf::Vector2f centre(map_.getWidth(), map_.getHeight() * 0.5);
-    centre *= float( map_.getTileSize() );
-    game_view_.setCenter(centre);
+  /* Centre the camera on the map */
+  sf::Vector2f centre(map_.getWidth(), map_.getHeight() * 0.5);
+  centre *= float( map_.getTileSize() );
+  game_view_.setCenter(centre);
 
-    this->action_state_ = ActionState::NONE;
+  selection_start_ = sf::Vector2u(0, 0);
+  selection_end_ = sf::Vector2u(0, 0);
+
+  current_tile_ = &game_->tiles_.at("wall");
+
+  action_state_ = ActionState::NONE;
 }
 
 }

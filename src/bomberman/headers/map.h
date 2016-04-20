@@ -40,6 +40,12 @@ class Map {
   void setWidth (unsigned int);
   void setTileSize(unsigned int);
 
+  /* edition */
+  /* select the tiles within the bounds */
+  void select(sf::Vector2u start, sf::Vector2u end, std::vector<TileType> blacklist);
+  /* deselect all tiles */
+  void clearSelected();
+
  private:
   Tile **data_;
   unsigned int height_;
@@ -49,6 +55,12 @@ class Map {
   std::vector<Tile> tiles_;
   unsigned int tile_size_;
   unsigned int num_regions_[1];
+
+  /* edition */
+  /* 0 = Deselected, 1 = Selected, 2 = Invalid */
+  std::vector<char> selected_;
+  unsigned int num_selected_;
+
 
 };
 
